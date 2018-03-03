@@ -8,11 +8,13 @@ public class Menu : MonoBehaviour
 
     public void Play()
     {
-        SceneManager.LoadScene("Game");
+        Fader.FadeTo(SceneEnum.Game, Color.black, 2);
+        //SceneManager.LoadScene("Game");
     }
 
     public void Quit()
     {
         Application.Quit();
     }
+
 }
