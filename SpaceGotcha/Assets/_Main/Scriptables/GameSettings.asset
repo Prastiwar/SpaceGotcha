@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de7087ab4b242b8448fb33ab8d4d907d, type: 3}
+  m_Name: GameSettings
+  m_EditorClassIdentifier: 
+  PlayerSpeed: 250
+  FinalScore: 10
+  FinalScoreMultiplier: 50
+  PlayerSpeedMultiplier: 5
+  ObstacleSpeedMultiplier: 0.01
+  StartCountMultiplier: 2
+  AddAmountMultiplier: 0
+  TakeAmountMultiplier: 0
+  ObstaclePrefab: {fileID: 1484308872774990, guid: d581436f2cb956f4f8cd7b37ea46b289,
+    type: 2}
+  ObstacleSpeed: 0.05
+  Radius: 20
+  HoleRadius: 10
+  StartCount: 11
+  AddAmount: 5
+  TakeAmount: 1
+  ParticlesPrefab: {fileID: 100000, guid: e0a499e6f749a4d41b6573159b072ba6, type: 2}
+  GameOverParticlesPrefab: {fileID: 1436790645303682, guid: d88abd7d60b149546a7899b01914e29e,
+    type: 2}
