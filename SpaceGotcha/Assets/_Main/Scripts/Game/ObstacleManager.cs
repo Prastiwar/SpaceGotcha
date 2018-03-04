@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using Unity.Collections;
-using Unity.Collections.LowLevel.Unsafe;
 using Unity.Jobs;
 using UnityEngine;
 using UnityEngine.Jobs;
@@ -15,15 +14,17 @@ public class ObstacleManager : MonoBehaviour
     NativeArray<Vector3> nativeWaypoints;
     TransformAccessArray transformAccessArray;
 
-    JPosition jPosition;
-    JobHandle jPositionHandle;
+    JObstaclePosition jObstaclePosition;
+    JobHandle jObstaclePositionHandle;
 
     void Awake()
     {
         Game game = GetComponent<Game>();
         settings = game.Data.Settings[game.Data.SettingsIndex];
+
         playerTrans = Game.Instance.Player.transform;
         baseTrans = playerTrans.parent;
+
         nativeWaypoints = new NativeArray<Vector3>(settings.StartCount, Allocator.Persistent);
         transformAccessArray = new TransformAccessArray(settings.StartCount);
 
@@ -59,13 +60,9 @@ public class ObstacleManager : MonoBehaviour
 
     void Update()
     {
-        if (Time.timeScale < 1)
-        {
-            return;
-        }
         if(Time.frameCount % 2 == 0)
         {
-            jPosition = new JPosition()
+            jObstaclePosition = new JObstaclePosition()
             {
                 target = baseTrans.position,
                 speed = settings.ObstacleSpeed,
@@ -73,20 +70,22 @@ public class ObstacleManager : MonoBehaviour
                 points = Game.Instance.Score,
                 player = playerTrans.position
             };
-            jPositionHandle = jPosition.Schedule(transformAccessArray);
+            jObstaclePositionHandle = jObstaclePosition.Schedule(transformAccessArray);
         }
     }
 
     void LateUpdate()
     {
-        if (Time.timeScale < 1)
-        {
-            return;
-        }
         if (Time.frameCount % 2 == 0)
         {
-            jPositionHandle.Complete();
+            jObstaclePositionHandle.Complete();
         }
+    }
+
+    public void GameOver()
+    {
+        jObstaclePositionHandle.Complete();
+        enabled = false;
     }
 
     void OnDisable()
@@ -95,12 +94,7 @@ public class ObstacleManager : MonoBehaviour
         transformAccessArray.Dispose();
     }
 
-    public void GameOver()
-    {
-        jPositionHandle.Complete();
-    }
-
-    struct JPosition : IJobParallelForTransform
+    struct JObstaclePosition : IJobParallelForTransform
     {
         [ReadOnly]
         public Vector3 target;

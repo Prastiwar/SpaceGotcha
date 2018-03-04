@@ -16,20 +16,35 @@ public class GameData : ScriptableObject
     public void Load()
     {
         SettingsIndex = (int)Persistance.LoadObject("SettingsIndex", 0);
-        
-        for (int i = 1; Settings.Count <= SettingsIndex || ( Settings.Count > i && Settings[i] == null); i++)
-        {
-            GameSettings newSettings = Instantiate(Settings[0]);
-            newSettings.Load(i, Settings[0]);
 
-            if (i < Settings.Count)
+        ListNullCheck();
+        LoadAllSettings();
+    }
+
+    void ListNullCheck()
+    {
+        int length = Settings.Count;
+
+        for (int i = 0; i < length; i++)
+        {
+            if (Settings[i] == null)
             {
-                Settings[i] = newSettings;
-            }
-            else
-            {
-                Settings.Add(newSettings);
+                GameSettings settings = Settings[0];
+                Settings.Clear();
+                Settings.Add(settings);
+                break;
             }
         }
     }
+
+    void LoadAllSettings()
+    {
+        for (int i = 1; Settings.Count <= SettingsIndex; i++)
+        {
+            GameSettings newSettings = Instantiate(Settings[i - 1]);
+            newSettings.Load(i, Settings[i - 1]);
+            Settings.Add(newSettings);
+        }
+    }
+
 }

@@ -105,6 +105,13 @@ namespace UnityTemplateProjects
 
             m_InterpolatingCameraState.UpdateTransform(transform);
         }
+
+        public void GameOver()
+        {
+            Cursor.visible = true;
+            Cursor.lockState = CursorLockMode.None;
+            enabled = false;
+        }
     }
 
 }

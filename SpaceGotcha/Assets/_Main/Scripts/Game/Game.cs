@@ -9,11 +9,13 @@ public class Game : MonoBehaviour
 {
     public static Game Instance;
 
-    [SerializeField] TextMeshProUGUI ScoreText;
     public GameData Data;
-
+    public bool IsOver = false;
     [HideInInspector] public GameObject Player;
     [HideInInspector] public GameObject PlayerBase;
+
+    [SerializeField] TextMeshProUGUI ScoreText;
+
     Transform playerBaseTrans;
     Result result;
 
@@ -43,7 +45,10 @@ public class Game : MonoBehaviour
         }
 
         Time.timeScale = 1;
+        IsOver = false;
+
         Data.Load();
+
         Cache();
     }
 
@@ -61,7 +66,7 @@ public class Game : MonoBehaviour
     
     void Update()
     {
-        if (Time.timeScale < 1)
+        if (IsOver)
         {
             return;
         }
@@ -82,18 +87,28 @@ public class Game : MonoBehaviour
             TPObjectPool.ActiveObj(obj, playerBaseTrans.position);
             StartCoroutine(TPObjectPool.DeactiveObj(obj, 1));
         }
+
         ScoreText.text = _score.Value.ToString();
     }
 
     void GameOver(bool hasWin)
     {
         Time.timeScale = 0;
+        IsOver = true;
+
+        // Disable unused scripts
+        PlayerBase.GetComponent<PlayerController>().GameOver();
+        FindObjectOfType<UnityTemplateProjects.SimpleCameraController>().GameOver();
+        GetComponent<ObstacleManager>().GameOver();
+
+        // Spawn particles before result
         GameObject particles = Instantiate(Data.Settings[Data.SettingsIndex].GameOverParticlesPrefab);
         ParticleSystem particleSystem = particles.GetComponent<ParticleSystem>();
         var main = particleSystem.main;
         main.startColor = hasWin ? Color.green : Color.red;
+
+        // Wait for particles animation end then go to results
         StartCoroutine(PauseParticles(particleSystem, hasWin));
-        GetComponent<ObstacleManager>().GameOver();
     }
 
     IEnumerator PauseParticles(ParticleSystem particleSystem, bool hasWin)

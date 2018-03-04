@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Result : MonoBehaviour
@@ -15,6 +14,7 @@ public class Result : MonoBehaviour
     public void GameOver(bool hasWin)
     {
         resultCanvas.SetActive(true);
+
         int randIndex = Random.Range(0, (hasWin) ? data.WinTexts.Length : data.LoseTexts.Length);
         string randText = (hasWin) ? data.WinTexts[randIndex] : data.LoseTexts[randIndex];
         TextMeshProUGUI playText = playButton.GetComponentInChildren<TextMeshProUGUI>();
@@ -27,11 +27,13 @@ public class Result : MonoBehaviour
         {
             Game.Instance.Data.SettingsIndex++;
 
+            // If there is no more settings in list
             if (Game.Instance.Data.SettingsIndex >= Game.Instance.Data.Settings.Count)
             {
                 CreateNewSettings();
             }
         }
+
         Game.Instance.Data.Save();
     }
 

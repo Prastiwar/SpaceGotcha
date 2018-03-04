@@ -21,7 +21,7 @@ MonoBehaviour:
   TakeAmountMultiplier: 0
   ObstaclePrefab: {fileID: 1484308872774990, guid: d581436f2cb956f4f8cd7b37ea46b289,
     type: 2}
-  ObstacleSpeed: 0.05
+  ObstacleSpeed: 0.08
   Radius: 20
   HoleRadius: 10
   StartCount: 11

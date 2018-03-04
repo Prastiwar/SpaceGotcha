@@ -23,11 +23,6 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (Time.timeScale < 1)
-        {
-            return;
-        }
-
         angle += -Input.GetAxis("Horizontal") * settings.PlayerSpeed * Time.deltaTime;
 
         Quaternion newRotation = m_transform.rotation;
@@ -35,4 +30,10 @@ public class PlayerController : MonoBehaviour
         newRotation.eulerAngles = vectorDir;
         m_transform.rotation = newRotation;
     }
+
+    public void GameOver()
+    {
+        enabled = false;
+    }
+
 }
