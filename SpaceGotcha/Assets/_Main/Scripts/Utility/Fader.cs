@@ -25,6 +25,7 @@ public class Fader : MonoBehaviour
         if (isFading)
             return;
 
+        Time.timeScale = 1;
         isFading = true;
 
         GameObject init = new GameObject();
@@ -92,6 +93,8 @@ public class Fader : MonoBehaviour
         while (isFadeIn ? (fadeCol.a > condValue) : (fadeCol.a < condValue))
         {
             fadeCol.a = Mathf.Lerp(fadeCol.a, b, fadeSpeed);
+            if (fadeCol.a < 0.5f)
+                fadeSpeed *= 2;
             layer.color = fadeCol;
             yield return update;
         }

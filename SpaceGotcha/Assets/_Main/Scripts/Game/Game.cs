@@ -35,16 +35,15 @@ public class Game : MonoBehaviour
         if (ReferenceEquals(Instance, null))
         {
             Instance = this;
-            //DontDestroyOnLoad(gameObject);
         }
         else
         {
-            Instance.gameObject.SetActive(true);
             Destroy(gameObject);
             return;
         }
 
         Time.timeScale = 1;
+        Data.Load();
         Cache();
     }
 
