@@ -28,11 +28,11 @@ public class Result : MonoBehaviour
     {
         if (hasWin)
         {
-            Game.Instance.SettingsIndex++;
+            Game.Instance.Data.SettingsIndex++;
 
-            if (Game.Instance.SettingsIndex >= Game.Instance.Settings.Count)
+            if (Game.Instance.Data.SettingsIndex >= Game.Instance.Data.Settings.Count)
             {
-                GameSettings newSettings = Instantiate(Game.Instance.Settings[Game.Instance.SettingsIndex - 1]);
+                GameSettings newSettings = Instantiate(Game.Instance.Data.Settings[Game.Instance.Data.SettingsIndex - 1]);
                 
                 newSettings.FinalScore += newSettings.FinalScoreMultiplier;
                 newSettings.PlayerSpeed += newSettings.PlayerSpeedMultiplier;
@@ -41,7 +41,7 @@ public class Result : MonoBehaviour
                 newSettings.AddAmount += newSettings.AddAmountMultiplier;
                 newSettings.TakeAmount -= newSettings.TakeAmountMultiplier;
 
-                Game.Instance.Settings.Add(newSettings);
+                Game.Instance.Data.Settings.Add(newSettings);
             }
         }
         SceneManager.LoadScene("Game");

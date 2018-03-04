@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
 
     void Awake()
     {
-        settings = Game.Instance.Settings[Game.Instance.SettingsIndex];
+        settings = Game.Instance.Data.Settings[Game.Instance.Data.SettingsIndex];
     }
 
     void Update()

@@ -10,8 +10,7 @@ public class Game : MonoBehaviour
     public static Game Instance;
 
     [SerializeField] TextMeshProUGUI ScoreText;
-    public int SettingsIndex;
-    public List<GameSettings> Settings = new List<GameSettings>();
+    public GameData Data;
 
     [HideInInspector] public GameObject Player;
     [HideInInspector] public GameObject PlayerBase;
@@ -36,13 +35,21 @@ public class Game : MonoBehaviour
         if (ReferenceEquals(Instance, null))
         {
             Instance = this;
+            //DontDestroyOnLoad(gameObject);
         }
         else
         {
+            Instance.gameObject.SetActive(true);
             Destroy(gameObject);
             return;
         }
+
         Time.timeScale = 1;
+        Cache();
+    }
+
+    void Cache()
+    {
         result = GetComponent<Result>();
         Player = GameObject.FindGameObjectWithTag("Player");
         PlayerBase = Player.transform.parent.gameObject;
@@ -50,7 +57,7 @@ public class Game : MonoBehaviour
         Score = new NativeCustom<int>(1, Allocator.Persistent);
         ScoreText.text = Score.Value.ToString();
 
-        TPObjectPool.AddToPool(Settings[SettingsIndex].ParticlesPrefab, 4);
+        TPObjectPool.AddToPool(Data.Settings[Data.SettingsIndex].ParticlesPrefab, 4);
     }
     
     void Update()
@@ -59,28 +66,30 @@ public class Game : MonoBehaviour
         {
             return;
         }
-
-        ScoreText.text = _score.Value.ToString();
+        
         if (_score.Value <= 0)
         {
             GameOver(false);
+            _score.Value = 0;
         }
-        else if (_score.Value >= Settings[SettingsIndex].FinalScore)
+        else if (_score.Value >= Data.Settings[Data.SettingsIndex].FinalScore)
         {
             GameOver(true);
+            _score.Value = Data.Settings[Data.SettingsIndex].FinalScore;
         }
         else if (ScoreText.text != _score.Value.ToString())
         {
-            GameObject obj = TPObjectPool.GetFreeObjOf(Settings[SettingsIndex].ParticlesPrefab, true);
+            GameObject obj = TPObjectPool.GetFreeObjOf(Data.Settings[Data.SettingsIndex].ParticlesPrefab, true);
             TPObjectPool.ActiveObj(obj, playerBaseTrans.position);
             StartCoroutine(TPObjectPool.DeactiveObj(obj, 1));
         }
+        ScoreText.text = _score.Value.ToString();
     }
 
     void GameOver(bool hasWin)
     {
         Time.timeScale = 0;
-        GameObject particles = Instantiate(Settings[SettingsIndex].GameOverParticlesPrefab);
+        GameObject particles = Instantiate(Data.Settings[Data.SettingsIndex].GameOverParticlesPrefab);
         ParticleSystem particleSystem = particles.GetComponent<ParticleSystem>();
         var main = particleSystem.main;
         main.startColor = hasWin ? Color.green : Color.red;
@@ -99,6 +108,7 @@ public class Game : MonoBehaviour
     {
         Instance = null;
         Score.Dispose();
+        TPObjectPool.Dispose();
     }
 
 }

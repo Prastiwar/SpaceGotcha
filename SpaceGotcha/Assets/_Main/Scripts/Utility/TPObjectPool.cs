@@ -378,5 +378,13 @@ namespace TP.Utilities
             }
             return length;
         }
+
+        /// <summary>  
+        ///  Clears all pools.
+        /// </summary>  
+        public static void Dispose()
+        {
+            Pool.Clear();
+        }
     }
 }

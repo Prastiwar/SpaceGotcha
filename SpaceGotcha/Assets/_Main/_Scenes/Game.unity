@@ -168,8 +168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ScoreText: {fileID: 1132128728}
   SettingsIndex: 0
-  Settings:
-  - {fileID: 11400000, guid: b442fbe7502f8074ca90f4c0cc13242c, type: 2}
+  Data: {fileID: 11400000, guid: aad7349b4379e8d4fab3feda7353a8fa, type: 2}
   Player: {fileID: 722099479}
   PlayerBase: {fileID: 1204229020}
 --- !u!114 &83336349
@@ -1848,6 +1847,14 @@ Prefab:
     - target: {fileID: 19800000, guid: 2356de1a83e3b9e4dbdc2c8f70c1210a, type: 2}
       propertyPath: EmissionModule.m_Bursts.Array.data[1].repeatInterval
       value: 0.01
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: 2356de1a83e3b9e4dbdc2c8f70c1210a, type: 2}
+      propertyPath: EmissionModule.m_Bursts.Array.data[0].countCurve.minScalar
+      value: 30.0000
+      objectReference: {fileID: 0}
+    - target: {fileID: 19800000, guid: 2356de1a83e3b9e4dbdc2c8f70c1210a, type: 2}
+      propertyPath: EmissionModule.m_Bursts.Array.data[1].countCurve.minScalar
+      value: 30.0000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2356de1a83e3b9e4dbdc2c8f70c1210a, type: 2}

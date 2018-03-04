@@ -21,7 +21,7 @@ public class ObstacleManager : MonoBehaviour
     void Awake()
     {
         Game game = GetComponent<Game>();
-        settings = game.Settings[game.SettingsIndex];
+        settings = game.Data.Settings[game.Data.SettingsIndex];
         playerTrans = Game.Instance.Player.transform;
         baseTrans = playerTrans.parent;
         nativeWaypoints = new NativeArray<Vector3>(settings.StartCount, Allocator.Persistent);
@@ -122,16 +122,12 @@ public class ObstacleManager : MonoBehaviour
             if (distancePlayer < 0.85f)
             {
                 transform.position = randomVector[GetRandomIndex()];
-                points.Value += Game.Instance.Settings[Game.Instance.SettingsIndex].AddAmount;
+                points.Value += Game.Instance.Data.Settings[Game.Instance.Data.SettingsIndex].AddAmount;
             }
             else if (distancePlanet < 1)
             {
                 transform.position = randomVector[GetRandomIndex()];
-                points.Value -= Game.Instance.Settings[Game.Instance.SettingsIndex].TakeAmount;
-                if (points.Value <= 0)
-                {
-                    points.Value = 0;
-                }
+                points.Value -= Game.Instance.Data.Settings[Game.Instance.Data.SettingsIndex].TakeAmount;
             }
             else
             {
