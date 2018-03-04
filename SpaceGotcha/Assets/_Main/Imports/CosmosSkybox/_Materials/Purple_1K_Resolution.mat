@@ -19,7 +19,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _BackTex:
-        m_Texture: {fileID: 2800000, guid: 96c199bf2da6633479ea4536ce66bec2, type: 3}
+        m_Texture: {fileID: 2800000, guid: 3e6185e88356ba94fa04e2396f8f930f, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BumpMap:
@@ -39,7 +39,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DownTex:
-        m_Texture: {fileID: 2800000, guid: f1285d1399d96f0438d3759ba234d28e, type: 3}
+        m_Texture: {fileID: 2800000, guid: 65f51745cb3b585459f05f4913238aa6, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
@@ -47,11 +47,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _FrontTex:
-        m_Texture: {fileID: 2800000, guid: c3636285da6b4344d91ff89fd556670a, type: 3}
+        m_Texture: {fileID: 2800000, guid: 1ad4d5fe539a6bf42b134a3187379508, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _LeftTex:
-        m_Texture: {fileID: 2800000, guid: c7cf8f63aa26f9c439bf607be6b4fe8d, type: 3}
+        m_Texture: {fileID: 2800000, guid: 3376cc0e70073b74ebfc5c8ef5880ecc, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
@@ -71,11 +71,11 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _RightTex:
-        m_Texture: {fileID: 2800000, guid: 46f657b61a981d747b79847775b24900, type: 3}
+        m_Texture: {fileID: 2800000, guid: a7e009505756bb44081de600ee573728, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _UpTex:
-        m_Texture: {fileID: 2800000, guid: 074265280bfab4949b132a5dd423d9cb, type: 3}
+        m_Texture: {fileID: 2800000, guid: f30df40ab307d4a4db1f09b2c61cf19e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
@@ -91,7 +91,7 @@ Material:
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _Rotation: 0
+    - _Rotation: 298
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1

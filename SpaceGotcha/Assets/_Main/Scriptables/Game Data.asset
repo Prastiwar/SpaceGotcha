@@ -11,10 +11,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fac999afe95ceaf4586452110b8802b0, type: 3}
   m_Name: Game Data
   m_EditorClassIdentifier: 
-  SettingsIndex: 4
+  SettingsIndex: 0
   Settings:
   - {fileID: 11400000, guid: b442fbe7502f8074ca90f4c0cc13242c, type: 2}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
